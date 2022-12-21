@@ -8,6 +8,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.robivan.binlist.R
 import com.robivan.binlist.databinding.FragmentDetailsBinding
 import com.robivan.binlist.domain.model.DetailsCard
 import com.robivan.binlist.utils.hide
@@ -18,7 +19,7 @@ class DetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val card: DetailsCard? by lazy {
-        arguments?.getParcelable(CARD_ARG, DetailsCard::class.java)
+        arguments?.getParcelable(CARD_ARG)
     }
 
     override fun onCreateView(
@@ -33,6 +34,16 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         card?.let {
             renderData(it)
+        }
+        initCloseButton()
+    }
+
+    private fun initCloseButton() {
+        binding.backButton.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commit()
         }
     }
 
@@ -58,8 +69,14 @@ class DetailsFragment : Fragment() {
         initRow(card.bankCity, detailsBankCityValue, detailsBankCity)
         initRow(card.bankUrl, detailsBankWebsiteValue, detailsBankWebsite)
         card.bankPhone?.let {
-            initRow(it[0], detailsBankPhoneValue1, detailsBankPhone1)
-            initRow(it[1], detailsBankPhoneValue2, detailsBankPhone2)
+            when {
+                it.size == 1 -> {
+                    initRow(it[0], detailsBankPhoneValue1, detailsBankPhone1)
+                    detailsBankPhone2.hide()
+                }
+                it.size >= 2 -> initRow(it[1], detailsBankPhoneValue2, detailsBankPhone2)
+                else -> {}
+            }
         }
     }
 
