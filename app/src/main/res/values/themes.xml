@@ -13,4 +13,15 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="CardDetailsText">
+        <item name="android:layout_marginStart">@dimen/default_margin</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="CardDetailsClickableText">
+        <item name="android:layout_marginStart">@dimen/default_margin</item>
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 </resources>

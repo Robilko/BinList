@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/card_elevation"
+    android:layout_margin="@dimen/default_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin">
+
+        <TextView
+            android:id="@+id/request_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLength="21"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4320 2300 5660 5555 322" />
+
+        <TextView
+            android:id="@+id/schema"
+            android:textSize="@dimen/header_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/request_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/request_number"
+            tools:text="visa" />
+
+        <TextView
+            android:id="@+id/currency_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currency_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/request_number" />
+
+        <TextView
+            android:id="@+id/currency_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            app:layout_constraintStart_toEndOf="@id/currency_header"
+            app:layout_constraintTop_toBottomOf="@+id/request_number"
+            tools:text="CAD" />
+
+        <TextView
+            android:id="@+id/country_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/country_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currency_header" />
+
+        <TextView
+            android:id="@+id/country_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/currency_header"
+            app:layout_constraintTop_toBottomOf="@+id/currency_header"
+            tools:text="Canada" />
+
+        <TextView
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/timestamp_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/country_text"
+            tools:text="2022.12.21 12:05:01" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
