@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">BinList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="details_header">Request details:</string>
+    <string name="search_hint">Enter from 6 to 8 first numbers of your card (BIN):</string>
+    <string name="search_button_text">Search</string>
+    <string name="request_history_is_empty">Requests history is empty</string>
+    <string name="requests_history_header">Requests history:</string>
+    <string name="country_header">Country:</string>
+    <string name="bank_name">Bank name:</string>
+    <string name="currency_header">Currency:</string>
+    <string name="website_header">Website:</string>
+    <string name="card_type_header">Type:</string>
+    <string name="phone_header">Phone number:</string>
+    <string name="other_phone_header">Other number:</string>
 </resources>
