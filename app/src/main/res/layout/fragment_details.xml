@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/default_margin"
     app:cardElevation="@dimen/card_elevation"
-    tools:context=".DetailsFragment">
+    tools:context=".ui.DetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 tools:text="visa" />
 
             <TextView
-                android:id="@+id/card_type_text"
+                android:id="@+id/card_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -116,6 +116,17 @@
                     android:layout_marginStart="@dimen/default_margin"
                     android:layout_weight="1"
                     tools:text="CARD SERVICES FOR CREDIT UNIONS, INC." />
+            </TableRow>
+
+            <TableRow android:id="@+id/details_bank_city">
+
+                <TextView android:text="@string/bank_city" />
+
+                <TextView
+                    android:id="@+id/details_bank_city_value"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_weight="1"
+                    tools:text="Quebec" />
             </TableRow>
 
             <TableRow android:id="@+id/details_bank_website">
