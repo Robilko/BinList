@@ -6,4 +6,7 @@
     <dimen name="card_elevation">10dp</dimen>
     <dimen name="timestamp_text_size">11sp</dimen>
     <dimen name="back_btn_size">40dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="card_elevation_20">20dp</dimen>
+    <dimen name="default_corner_radius">15dp</dimen>
 </resources>

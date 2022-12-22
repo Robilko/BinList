@@ -1,65 +1,53 @@
 package com.robivan.binlist.ui
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import com.robivan.binlist.R
 import com.robivan.binlist.databinding.FragmentDetailsBinding
 import com.robivan.binlist.domain.model.DetailsCard
 import com.robivan.binlist.utils.hide
 
-class DetailsFragment : Fragment() {
+class DetailsDialogFragment(
+    private val card: DetailsCard,
+    private val detailsListener: DetailsOnClickListener
+) : DialogFragment() {
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
-    private val card: DetailsCard? by lazy {
-        arguments?.getParcelable(CARD_ARG)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        _binding = FragmentDetailsBinding.inflate(layoutInflater)
+        return AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog)
+            .setView(binding.root).create()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailsBinding.inflate(layoutInflater)
-        return binding.root
+    ): View? {
+        initData()
+        initCloseButton()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        card?.let {
-            renderData(it)
-        }
-        initCloseButton()
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun initCloseButton() {
-        binding.backButton.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commit()
-        }
+        binding.backButton.setOnClickListener { dismiss() }
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        savedInstanceState?.getParcelable(CARD_ARG, DetailsCard::class.java)?.let { renderData(it) }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        card?.let {
-            outState.putParcelable(CARD_ARG, it)
-        }
-    }
-
-    private fun renderData(card: DetailsCard) = with(binding) {
+    private fun initData() = with(binding) {
         cardNumber.text = card.number
         cardSchema.text = card.scheme.orEmpty()
         cardType.text = card.type.orEmpty()
@@ -86,15 +74,5 @@ class DetailsFragment : Fragment() {
         } else {
             textView.text = data
         }
-    }
-
-    companion object {
-        private const val CARD_ARG = "card_arg"
-
-        @JvmStatic
-        fun newInstance(card: DetailsCard) =
-            DetailsFragment().apply {
-                arguments = bundleOf(CARD_ARG to card)
-            }
     }
 }

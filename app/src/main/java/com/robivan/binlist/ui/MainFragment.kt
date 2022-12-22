@@ -2,7 +2,6 @@ package com.robivan.binlist.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +47,11 @@ class MainFragment : Fragment() {
         initSearch()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     private fun initData() {
         binding.recycler.adapter = recyclerAdapter
         viewModel.apply {
@@ -71,13 +75,8 @@ class MainFragment : Fragment() {
                 }
                 searchButton.isEnabled = length > 6
             }
-            setOnKeyListener { v, keyCode, event ->
-                Log.d("TAG", "initSearch() called with:  keyCode = $keyCode, event = $event")
+            setOnKeyListener { _, keyCode, _ ->
                 if (keyCode == KeyEvent.KEYCODE_DEL) {
-                    Log.d(
-                        "TAG",
-                        "initSearch() called with: v = $v, keyCode = $keyCode, event = $event"
-                    )
                     val currentText = searchEditText.text.toString()
                     val length = currentText.length
                     if (length > 0) {
@@ -109,13 +108,24 @@ class MainFragment : Fragment() {
             hideKeyboard(it)
             sendSearchRequest()
         }
-        searchButton.setOnClickListener { sendSearchRequest() }
+        searchButton.setOnClickListener {
+            hideKeyboard(it)
+            sendSearchRequest()
+        }
     }
 
     private fun sendSearchRequest() = with(binding) {
         val currentText = searchEditText.text.toString().filter { it.isDigit() }
-        searchEditText.text?.clear()
-        viewModel.getCardInfo(currentText)
+        if (currentText.length < 6) {
+            Toast.makeText(
+                context,
+                getString(R.string.toast_attention_short_request),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            searchEditText.text?.clear()
+            viewModel.getCardInfo(currentText)
+        }
     }
 
     private fun renderData(state: AppState) {
@@ -135,7 +145,11 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.recyclerLoader.hide()
-                Toast.makeText(context, state.error.localizedMessage, Toast.LENGTH_LONG).show()
+                state.error.localizedMessage.let {
+                    val errorMessage =
+                        if (it == "HTTP 404") getString(R.string.error_message_404) else it
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -149,9 +163,10 @@ class MainFragment : Fragment() {
     }
 
     private fun openDetailsFragment(card: DetailsCard) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.container, DetailsFragment.newInstance(card))
-            .commit()
+        view?.let { hideKeyboard(it) }
+        DetailsDialogFragment(card, object : DetailsOnClickListener {
+            //TODO
+        }).show(requireActivity().supportFragmentManager, DETAILS_DIALOG_KEY)
     }
 
     private fun hideKeyboard(view: View) {
@@ -160,6 +175,8 @@ class MainFragment : Fragment() {
     }
 
     companion object {
+        private const val DETAILS_DIALOG_KEY = "details_dialog"
+
         @JvmStatic
         fun newInstance() = MainFragment()
     }

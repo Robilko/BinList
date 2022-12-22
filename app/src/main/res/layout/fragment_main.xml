@@ -12,8 +12,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_16"
+        android:layout_margin="@dimen/default_margin"
         android:hint="@string/search_hint"
+        app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
         app:endIconDrawable="@android:drawable/ic_menu_search"
         app:endIconMode="custom"
         app:endIconTint="@color/design_default_color_primary"
@@ -59,7 +61,7 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_marginVertical="@dimen/default_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +97,5 @@
         app:layout_constraintEnd_toEndOf="@+id/recycler"
         app:layout_constraintStart_toStartOf="@+id/recycler"
         app:layout_constraintTop_toTopOf="@+id/recycler" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
