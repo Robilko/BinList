@@ -16,4 +16,6 @@
     <string name="bank_city">City:</string>
     <string name="toast_attention_short_request">You must enter 6 digits !</string>
     <string name="error_message_404">There is no data for this card number</string>
+    <string name="dialog_attention_title">Server response:</string>
+    <string name="dialog_error_title">Error:</string>
 </resources>

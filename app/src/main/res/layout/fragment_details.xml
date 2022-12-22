@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_20"
     tools:context=".ui.DetailsDialogFragment">
@@ -14,7 +14,7 @@
         android:layout_height="@dimen/back_btn_size"
         android:layout_margin="@dimen/default_margin"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:tint="@color/back_button"
+        android:tint="@color/black_n_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_16"
         android:src="@drawable/ic_card"
+        app:layout_constraintEnd_toStartOf="@+id/base_details_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details_header"
         tools:ignore="ContentDescription" />
@@ -47,7 +48,6 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="@+id/image">
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="21"
-            android:textSize="@dimen/header_text_size"
+            android:textSize="@dimen/details_number_text_size"
             android:textStyle="bold"
             tools:text="4320 2300 45**" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/card_schema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/black_n_white"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
             tools:text="visa" />
@@ -78,7 +78,7 @@
     </LinearLayout>
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_16"
         app:layout_constraintBottom_toBottomOf="parent"

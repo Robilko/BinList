@@ -17,15 +17,14 @@
     <style name="CardDetailsText">
         <item name="android:layout_marginStart">@dimen/default_margin</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="CardDetailsClickableText">
-        <item name="android:layout_marginStart">@dimen/default_margin</item>
+    <style name="CardDetailsClickableText" parent="CardDetailsText">
         <item name="android:textColor">@android:color/holo_blue_dark</item>
-        <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:windowBackground">@drawable/popup_background</item>
     </style>
 </resources>

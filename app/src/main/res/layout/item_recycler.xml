@@ -28,7 +28,7 @@
             android:id="@+id/schema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/black_n_white"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/request_number"
