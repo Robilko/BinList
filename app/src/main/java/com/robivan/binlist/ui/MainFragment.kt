@@ -66,15 +66,15 @@ class MainFragment : Fragment() {
             addTextChangedListener { editable ->
                 val currentText = editable.toString()
                 val length = currentText.length
-                if (length == 4) {
+                if (length == DIGITS_COUNT_BEFORE_SPACE) {
                     this.setText(currentText.plus(" "))
-                    this.setSelection(length + 1)
+                    this.setSelection(length + ONE_CHAR_AMOUNT)
                 }
-                if (length == 7) {
+                if (length == SIX_DIGITS_WITH_SPACE) {
                     this.setText(currentText.plus("**"))
-                    this.setSelection(length + 2)
+                    this.setSelection(length + TWO_CHAR_AMOUNT)
                 }
-                searchButton.isEnabled = length > 6
+                searchButton.isEnabled = length > VALID_CHAR_AMOUNT
             }
             setOnKeyListener { _, keyCode, _ ->
                 if (keyCode == KeyEvent.KEYCODE_DEL) {
@@ -82,15 +82,15 @@ class MainFragment : Fragment() {
                     val length = currentText.length
                     if (length > 0) {
                         when (currentText.last()) {
-                            ' ' -> {
+                            SPACE_CHAR -> {
                                 searchEditText.apply {
-                                    setText(currentText.substring(0, length - 2))
+                                    setText(currentText.substring(0, length - DIGIT_WITH_SPACE_AMOUNT))
                                     this.text?.length?.let { setSelection(it) }
                                 }
                             }
-                            '*' -> {
+                            STAR_CHAR -> {
                                 searchEditText.apply {
-                                    setText(currentText.substring(0, length - 3))
+                                    setText(currentText.substring(0, length - DIGIT_WITH_STARS_AMOUNT))
                                     this.text?.length?.let { setSelection(it) }
                                 }
                             }
@@ -117,7 +117,7 @@ class MainFragment : Fragment() {
 
     private fun sendSearchRequest() = with(binding) {
         val currentText = searchEditText.text.toString().filter { it.isDigit() }
-        if (currentText.length < 6) {
+        if (currentText.length < VALID_CHAR_AMOUNT) {
             Toast.makeText(
                 context,
                 getString(R.string.toast_attention_short_request),
@@ -148,7 +148,7 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.recyclerLoader.hide()
                 state.error.localizedMessage.let {
-                    if (it == "HTTP 404 ") {
+                    if (it == ERROR_404) {
                         showErrorDialog(
                             getString(R.string.error_message_404),
                             getString(R.string.dialog_attention_title),
@@ -213,6 +213,16 @@ class MainFragment : Fragment() {
 
     companion object {
         private const val DETAILS_DIALOG_KEY = "details_dialog"
+        private const val ERROR_404 = "HTTP 404 "
+        private const val SPACE_CHAR = ' '
+        private const val STAR_CHAR = '*'
+        private const val DIGITS_COUNT_BEFORE_SPACE = 4
+        private const val SIX_DIGITS_WITH_SPACE = 7
+        private const val ONE_CHAR_AMOUNT = 1
+        private const val TWO_CHAR_AMOUNT = 2
+        private const val VALID_CHAR_AMOUNT = 6
+        private const val DIGIT_WITH_SPACE_AMOUNT = 2
+        private const val DIGIT_WITH_STARS_AMOUNT = 3
 
         @JvmStatic
         fun newInstance() = MainFragment()

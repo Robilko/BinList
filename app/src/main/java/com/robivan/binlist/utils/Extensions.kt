@@ -15,3 +15,10 @@ fun View.hide(): View {
     }
     return this
 }
+
+fun validateUrl(url: String): String =
+    if (!url.startsWith("https://") || !url.startsWith("http://")) {
+        "http://$url"
+    } else {
+        url
+    }

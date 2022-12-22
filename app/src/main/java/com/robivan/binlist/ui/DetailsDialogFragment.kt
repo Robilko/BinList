@@ -13,6 +13,7 @@ import com.robivan.binlist.R
 import com.robivan.binlist.databinding.FragmentDetailsBinding
 import com.robivan.binlist.domain.model.DetailsCard
 import com.robivan.binlist.utils.hide
+import com.robivan.binlist.utils.validateUrl
 import org.apache.commons.lang3.StringEscapeUtils
 
 class DetailsDialogFragment(
@@ -34,18 +35,14 @@ class DetailsDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding.backButton.setOnClickListener { dismiss() }
         initData()
-        initCloseButton()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    private fun initCloseButton() {
-        binding.backButton.setOnClickListener { dismiss() }
     }
 
     private fun initData() = with(binding) {
@@ -118,11 +115,4 @@ class DetailsDialogFragment(
             }
         }
     }
-
-    private fun validateUrl(url: String): String =
-        if (!url.startsWith("https://") || !url.startsWith("http://")) {
-            "http://$url"
-        } else {
-            url
-        }
 }
