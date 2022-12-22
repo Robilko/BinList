@@ -10,7 +10,7 @@ data class CountryDTO(
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("latitude")
-    val latitude: Double?,
+    val latitude: Double,
     @SerializedName("longitude")
-    val longitude: Double?
+    val longitude: Double
 )

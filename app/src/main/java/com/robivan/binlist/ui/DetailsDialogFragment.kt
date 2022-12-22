@@ -56,13 +56,28 @@ class DetailsDialogFragment(
         initRow(card.bankName, detailsBankNameValue, detailsBankName)
         initRow(card.bankCity, detailsBankCityValue, detailsBankCity)
         initRow(card.bankUrl, detailsBankWebsiteValue, detailsBankWebsite)
-        card.bankPhone?.let {
+        initPhoneNumbers(card.bankPhone)
+    }
+
+    private fun initPhoneNumbers(list: List<String>?) = with(binding) {
+        if (list.isNullOrEmpty()) {
+            detailsBankPhone1.hide()
+            detailsBankPhone2.hide()
+        } else {
             when {
-                it.size == 1 -> {
-                    initRow(it[0], detailsBankPhoneValue1, detailsBankPhone1)
+                list.size == 1 -> {
+                    initRow(
+                        list[0].filter { it.isDigit() },
+                        detailsBankPhoneValue1,
+                        detailsBankPhone1
+                    )
                     detailsBankPhone2.hide()
                 }
-                it.size >= 2 -> initRow(it[1], detailsBankPhoneValue2, detailsBankPhone2)
+                list.size >= 2 -> initRow(
+                    list[1].filter { it.isDigit() },
+                    detailsBankPhoneValue2,
+                    detailsBankPhone2
+                )
                 else -> {}
             }
         }
@@ -73,6 +88,38 @@ class DetailsDialogFragment(
             row.hide()
         } else {
             textView.text = data
+            when (row.id) {
+                R.id.details_country -> {
+                    binding.detailsCountryValue.setOnClickListener {
+                        detailsListener.onCountryClicked(
+                            card.countryLatitude,
+                            card.countryLongitude
+                        )
+                    }
+                }
+                R.id.details_bank_website -> {
+                    binding.detailsBankWebsiteValue.setOnClickListener {
+                        detailsListener.onWebsiteClicked(validateUrl(data))
+                    }
+                }
+                R.id.details_bank_phone1 -> {
+                    binding.detailsBankPhoneValue1.setOnClickListener {
+                        detailsListener.onPhoneClicked(data)
+                    }
+                }
+                R.id.details_bank_phone2 -> {
+                    binding.detailsBankPhoneValue2.setOnClickListener {
+                        detailsListener.onPhoneClicked(data)
+                    }
+                }
+            }
         }
     }
+
+    private fun validateUrl(url: String): String =
+        if (!url.startsWith("https://") || !url.startsWith("http://")) {
+            "http://$url"
+        } else {
+            url
+        }
 }

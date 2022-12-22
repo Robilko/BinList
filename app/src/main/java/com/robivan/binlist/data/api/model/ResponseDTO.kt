@@ -8,7 +8,7 @@ data class ResponseDTO(
     @SerializedName("type")
     val type: String?,
     @SerializedName("country")
-    val country: CountryDTO?,
+    val country: CountryDTO,
     @SerializedName("bank")
     val bank: BankDTO?
 )

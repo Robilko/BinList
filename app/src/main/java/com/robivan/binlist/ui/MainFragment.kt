@@ -2,6 +2,8 @@ package com.robivan.binlist.ui
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -190,7 +192,17 @@ class MainFragment : Fragment() {
     private fun openDetailsFragment(card: DetailsCard) {
         view?.let { hideKeyboard(it) }
         DetailsDialogFragment(card, object : DetailsOnClickListener {
-            //TODO
+            override fun onCountryClicked(latitude: Double, longitude: Double) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("geo:$latitude,$longitude?z=5")))
+            }
+
+            override fun onWebsiteClicked(url: String) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+
+            override fun onPhoneClicked(phoneNumber: String) {
+                startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber")))
+            }
         }).show(requireActivity().supportFragmentManager, DETAILS_DIALOG_KEY)
     }
 
