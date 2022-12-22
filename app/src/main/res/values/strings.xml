@@ -18,4 +18,6 @@
     <string name="error_message_404">There is no data for this card number</string>
     <string name="dialog_attention_title">Server response:</string>
     <string name="dialog_error_title">Error:</string>
+    <string name="card_type">Type:</string>
+    <string name="card_brand">Brand:</string>
 </resources>

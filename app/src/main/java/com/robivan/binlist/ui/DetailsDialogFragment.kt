@@ -13,6 +13,7 @@ import com.robivan.binlist.R
 import com.robivan.binlist.databinding.FragmentDetailsBinding
 import com.robivan.binlist.domain.model.DetailsCard
 import com.robivan.binlist.utils.hide
+import org.apache.commons.lang3.StringEscapeUtils
 
 class DetailsDialogFragment(
     private val card: DetailsCard,
@@ -50,7 +51,9 @@ class DetailsDialogFragment(
     private fun initData() = with(binding) {
         cardNumber.text = card.number
         cardSchema.text = card.scheme.orEmpty()
-        cardType.text = card.type.orEmpty()
+        cardTypeValue.text = card.type ?: "-"
+        cardBrandValue.text = card.brand ?: "-"
+        emoji.text = StringEscapeUtils.unescapeJava(card.countryEmoji)
         initRow(card.countryName, detailsCountryValue, detailsCountry)
         initRow(card.currency, detailsCurrencyValue, detailsCurrency)
         initRow(card.bankName, detailsBankNameValue, detailsBankName)

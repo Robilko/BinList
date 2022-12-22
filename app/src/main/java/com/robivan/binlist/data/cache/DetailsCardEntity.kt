@@ -11,6 +11,7 @@ data class DetailsCardEntity(
     @ColumnInfo(name = "number") val number: String,
     @ColumnInfo(name = "scheme") val scheme: String?,
     @ColumnInfo(name = "type") val type: String?,
+    @ColumnInfo(name = "brand") val brand: String?,
     @ColumnInfo(name = "country_name") val countryName: String?,
     @ColumnInfo(name = "country_emoji") val countryEmoji: String?,
     @ColumnInfo(name = "currency") val currency: String?,

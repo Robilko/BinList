@@ -7,6 +7,8 @@ data class ResponseDTO(
     val scheme: String?,
     @SerializedName("type")
     val type: String?,
+    @SerializedName("brand")
+    val brand: String?,
     @SerializedName("country")
     val country: CountryDTO,
     @SerializedName("bank")

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.robivan.binlist.databinding.ItemRecyclerBinding
 import com.robivan.binlist.domain.model.DetailsCard
+import org.apache.commons.lang3.StringEscapeUtils
 
 class CardsRVAdapter(private val listener: ItemClickListener) :
     RecyclerView.Adapter<CardsRVAdapter.CardViewHolder>() {
@@ -20,6 +21,7 @@ class CardsRVAdapter(private val listener: ItemClickListener) :
             schema.text = card.scheme.orEmpty()
             currencyText.text = card.currency ?: "-"
             countryText.text = card.countryName ?: "-"
+            countryEmoji.text = StringEscapeUtils.unescapeJava(card.countryEmoji)
             timestamp.text = card.timestamp
             itemView.setOnClickListener { listener.onItemClick(card) }
         }

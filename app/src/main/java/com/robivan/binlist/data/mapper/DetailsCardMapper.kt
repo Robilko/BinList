@@ -13,6 +13,7 @@ class DetailsCardMapper : IDetailsCardMapper {
             number = formatNumber(number),
             scheme = response.scheme,
             type = response.type,
+            brand = response.brand,
             countryName = response.country.name,
             countryEmoji = response.country.emoji,
             currency = response.country.currency,
@@ -31,6 +32,7 @@ class DetailsCardMapper : IDetailsCardMapper {
             number = card.number,
             scheme = card.scheme,
             type = card.type,
+            brand = card.brand,
             countryName = card.countryName,
             countryEmoji = card.countryEmoji,
             currency = card.currency,
@@ -39,7 +41,7 @@ class DetailsCardMapper : IDetailsCardMapper {
             bankName = card.bankName,
             bankUrl = card.bankUrl,
             bankCity = card.bankCity,
-            bankPhone = card.bankPhone?.joinToString (", "),
+            bankPhone = card.bankPhone?.joinToString(", "),
             timestamp = card.timestamp
         )
 
@@ -48,6 +50,7 @@ class DetailsCardMapper : IDetailsCardMapper {
             number = entity.number,
             scheme = entity.scheme,
             type = entity.type,
+            brand = entity.brand,
             countryName = entity.countryName,
             countryEmoji = entity.countryEmoji,
             currency = entity.currency,
@@ -65,6 +68,7 @@ class DetailsCardMapper : IDetailsCardMapper {
             number = formatNumber(number),
             scheme = response.scheme,
             type = response.type,
+            brand = response.brand,
             countryName = response.country.name,
             countryEmoji = response.country.emoji,
             currency = response.country.currency,

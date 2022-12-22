@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_margin">
+        android:padding="@dimen/margin_16">
 
         <TextView
             android:id="@+id/request_number"
@@ -73,10 +73,19 @@
             tools:text="Canada" />
 
         <TextView
+            android:id="@+id/country_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/timestamp"
+            app:layout_constraintTop_toTopOf="@+id/country_text"
+            tools:drawableTop="@drawable/ic_emoji" />
+
+        <TextView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/timestamp_text_size"
+            android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/country_header"
             tools:text="2022.12.21 12:05:01" />

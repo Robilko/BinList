@@ -8,6 +8,7 @@ data class DetailsCard(
     val number: String,
     val scheme: String?,
     val type: String?,
+    val brand: String?,
     val countryName: String?,
     val countryEmoji: String?,
     val currency: String?,
