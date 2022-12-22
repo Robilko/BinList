@@ -1,11 +1,9 @@
 package com.robivan.binlist.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -31,6 +29,7 @@ class MainFragment : Fragment() {
             openDetailsFragment(card)
         }
     })
+    private var currentList = listOf<DetailsCard>()
 
 
     override fun onCreateView(
@@ -141,25 +140,51 @@ class MainFragment : Fragment() {
                     initRecycler(state.data as List<DetailsCard>)
                 } else if (state.data is DetailsCard) {
                     openDetailsFragment(state.data)
+                    refreshRecycler(state.data)
                 }
             }
             is AppState.Error -> {
                 binding.recyclerLoader.hide()
                 state.error.localizedMessage.let {
-                    val errorMessage =
-                        if (it == "HTTP 404") getString(R.string.error_message_404) else it
-                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                    if (it == "HTTP 404 ") {
+                        showErrorDialog(
+                            getString(R.string.error_message_404),
+                            getString(R.string.dialog_attention_title),
+                            R.drawable.ic_attention
+                        )
+                    } else {
+                        showErrorDialog(
+                            it,
+                            getString(R.string.dialog_error_title),
+                            R.drawable.ic_error
+                        )
+                    }
                 }
             }
         }
+    }
+
+    private fun showErrorDialog(message: String?, title: String, iconResId: Int) {
+        AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setIcon(iconResId)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .show()
     }
 
     private fun initRecycler(cardList: List<DetailsCard>) {
         if (cardList.isEmpty()) {
             binding.emptyList.show()
         } else {
+            currentList = cardList
             recyclerAdapter.submitList(cardList)
         }
+    }
+
+    private fun refreshRecycler(card: DetailsCard) {
+        currentList = currentList.toMutableList().also { it.add(card) }
+        recyclerAdapter.submitList(currentList)
     }
 
     private fun openDetailsFragment(card: DetailsCard) {
