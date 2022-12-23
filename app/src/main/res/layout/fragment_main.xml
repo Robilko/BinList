@@ -28,10 +28,11 @@
             android:id="@+id/search_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
+            android:gravity="center"
             android:inputType="number"
             android:maxLength="9"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            android:textSize="@dimen/search_text_number_size" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
