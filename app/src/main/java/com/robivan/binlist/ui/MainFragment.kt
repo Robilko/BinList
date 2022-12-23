@@ -187,6 +187,7 @@ class MainFragment : Fragment() {
     private fun refreshRecycler(card: DetailsCard) {
         currentList = currentList.toMutableList().also { it.add(card) }
         recyclerAdapter.submitList(currentList)
+        binding.recycler.smoothScrollToPosition(currentList.size - 1)
     }
 
     private fun openDetailsFragment(card: DetailsCard) {

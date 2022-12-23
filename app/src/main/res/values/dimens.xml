@@ -10,4 +10,5 @@
     <dimen name="margin_20">20dp</dimen>
     <dimen name="card_elevation_20">20dp</dimen>
     <dimen name="default_corner_radius">15dp</dimen>
+    <dimen name="search_text_number_size">25sp</dimen>
 </resources>
