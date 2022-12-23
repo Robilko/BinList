@@ -93,10 +93,12 @@
         android:text="@string/request_history_is_empty"
         android:textColor="@color/design_default_color_primary"
         android:textSize="@dimen/header_text_size"
+        android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_history_100"
         app:layout_constraintBottom_toBottomOf="@+id/recycler"
         app:layout_constraintEnd_toEndOf="@+id/recycler"
         app:layout_constraintStart_toStartOf="@+id/recycler"
-        app:layout_constraintTop_toTopOf="@+id/recycler" />
+        app:layout_constraintTop_toTopOf="@+id/recycler"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
